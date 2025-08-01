@@ -1,0 +1,42 @@
+{
+  "name": "ai_interviewer",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:push": "npx drizzle-kit push",
+    "db:studio": "npx drizzle-kit studio"
+  },
+  "dependencies": {
+    "@clerk/nextjs": "^6.25.4",
+    "@google/generative-ai": "^0.24.1",
+    "@neondatabase/serverless": "^1.0.1",
+    "@radix-ui/react-collapsible": "^1.1.11",
+    "@radix-ui/react-dialog": "^1.1.14",
+    "@radix-ui/react-slot": "^1.2.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "drizzle-orm": "^0.44.3",
+    "lucide-react": "^0.525.0",
+    "moment": "^2.30.1",
+    "next": "15.4.1",
+    "next-themes": "^0.4.6",
+    "papaparse": "^5.5.3",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-hook-speech-to-text": "^0.8.0",
+    "react-webcam": "^7.2.0",
+    "sonner": "^2.0.6",
+    "tailwind-merge": "^3.3.1",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "drizzle-kit": "^0.31.4",
+    "tailwindcss": "^4",
+    "tw-animate-css": "^1.3.5"
+  }
+}
