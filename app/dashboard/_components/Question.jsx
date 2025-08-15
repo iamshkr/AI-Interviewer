@@ -138,7 +138,13 @@
 
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
-import { Search, ChevronRight, Link as LinkIcon, Download, Loader, AlertCircle } from 'lucide-react'; // Using lucide-react for icons
+import {
+  Search,
+  ChevronRight,
+  Link as LinkIcon,
+  Loader,
+  AlertCircle,
+} from 'lucide-react';
 
 export default function Question() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -170,13 +176,13 @@ export default function Question() {
     }
     const lower = searchTerm.toLowerCase();
     const matches = companyFiles.filter((file) =>
-      file.toLowerCase().replace(/_/g, " ").includes(lower)
+      file.toLowerCase().replace(/_/g, ' ').includes(lower)
     );
     setFilteredFiles(matches);
   }, [searchTerm, companyFiles]);
 
   const handleFileClick = (file) => {
-    setSearchTerm(file.replace(/_/g, " ").replace('.csv', ''));
+    setSearchTerm(file.replace(/_/g, ' ').replace('.csv', ''));
     setSelectedFile(file);
     setFilteredFiles([]);
   };
@@ -208,25 +214,27 @@ export default function Question() {
   };
 
   return (
-    <div className="bg-slate-50 min-h-screen">
+    <div className="">
+      {/* Main container */}
       <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
-        
         {/* Header */}
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-extrabold text-gray-800 tracking-tight">Company-Wise Questions</h1>
+          <h1 className="text-4xl font-extrabold text-gray-800 tracking-tight">
+            Company-Wise Questions
+          </h1>
           <p className="mt-3 text-lg text-gray-600">
             Search for a company to find frequently asked interview questions.
           </p>
         </div>
 
-        {/* Search Input and Suggestions */}
+        {/* Search Input */}
         <div className="relative max-w-2xl mx-auto">
-          <div className="flex items-center shadow-lg rounded-full bg-white overflow-hidden border-2 border-transparent focus-within:border-indigo-600 transition-colors">
+          <div className="flex items-center shadow-lg rounded-full bg-white overflow-hidden border border-gray-200 focus-within:border-indigo-600 transition-colors">
             <Search className="h-6 w-6 text-gray-400 mx-4" />
             <input
               type="text"
               placeholder="Search for a company (e.g., Google, Amazon)..."
-              className="p-4 w-full text-lg border-0 focus:ring-0"
+              className="p-4 w-full text-lg border-0 focus:outline-none"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -239,7 +247,7 @@ export default function Question() {
               <ChevronRight className="h-6 w-6 sm:hidden" />
             </button>
           </div>
-          
+
           {/* Suggestions Dropdown */}
           {filteredFiles.length > 0 && (
             <ul className="absolute z-10 w-full mt-2 border rounded-lg bg-white shadow-xl max-h-72 overflow-y-auto">
@@ -249,7 +257,7 @@ export default function Question() {
                   onClick={() => handleFileClick(file)}
                   className="cursor-pointer px-5 py-3 text-gray-700 hover:bg-indigo-50 flex items-center justify-between"
                 >
-                  <span>{file.replace(/_/g, " ").replace('.csv', '')}</span>
+                  <span>{file.replace(/_/g, ' ').replace('.csv', '')}</span>
                   <ChevronRight className="h-5 w-5 text-gray-400" />
                 </li>
               ))}
@@ -267,14 +275,17 @@ export default function Question() {
           )}
 
           {error && (
-             <div className="max-w-md mx-auto bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md shadow-md" role="alert">
-                <div className="flex items-center">
-                    <AlertCircle className="h-6 w-6 mr-3" />
-                    <div>
-                        <p className="font-bold">An Error Occurred</p>
-                        <p>{error}</p>
-                    </div>
+            <div
+              className="max-w-md mx-auto bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md shadow-md"
+              role="alert"
+            >
+              <div className="flex items-center">
+                <AlertCircle className="h-6 w-6 mr-3" />
+                <div>
+                  <p className="font-bold">An Error Occurred</p>
+                  <p>{error}</p>
                 </div>
+              </div>
             </div>
           )}
 
@@ -283,28 +294,51 @@ export default function Question() {
               <table className="w-full text-left">
                 <thead className="bg-gray-100 border-b border-gray-200">
                   <tr>
-                    <th className="px-6 py-4 text-sm font-semibold text-gray-600 uppercase">ID</th>
-                    <th className="px-6 py-4 text-sm font-semibold text-gray-600 uppercase">Title</th>
-                    <th className="px-6 py-4 text-sm font-semibold text-gray-600 uppercase">Difficulty</th>
-                    <th className="px-6 py-4 text-sm font-semibold text-gray-600 uppercase text-center">Acceptance</th>
-                    <th className="px-6 py-4 text-sm font-semibold text-gray-600 uppercase text-center">Link</th>
+                    <th className="px-6 py-4 text-sm font-semibold text-gray-600 uppercase">
+                      ID
+                    </th>
+                    <th className="px-6 py-4 text-sm font-semibold text-gray-600 uppercase">
+                      Title
+                    </th>
+                    <th className="px-6 py-4 text-sm font-semibold text-gray-600 uppercase">
+                      Difficulty
+                    </th>
+                    <th className="px-6 py-4 text-sm font-semibold text-gray-600 uppercase text-center">
+                      Acceptance
+                    </th>
+                    <th className="px-6 py-4 text-sm font-semibold text-gray-600 uppercase text-center">
+                      Link
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {questions.map((q, idx) => (
-                    <tr key={idx} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4 text-gray-500 font-mono">{q.ID}</td>
-                      <td className="px-6 py-4 text-gray-800 font-medium">{q.Title}</td>
+                    <tr
+                      key={idx}
+                      className="hover:bg-gray-50 transition-colors"
+                    >
+                      <td className="px-6 py-4 text-gray-500 font-mono">
+                        {q.ID}
+                      </td>
+                      <td className="px-6 py-4 text-gray-800 font-medium">
+                        {q.Title}
+                      </td>
                       <td className="px-6 py-4">
-                        <span className={`px-3 py-1 text-xs font-semibold rounded-full ${
-                          q.Difficulty === 'Easy' ? 'bg-green-100 text-green-800' :
-                          q.Difficulty === 'Medium' ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-red-100 text-red-800'
-                        }`}>
+                        <span
+                          className={`px-3 py-1 text-xs font-semibold rounded-full ${
+                            q.Difficulty === 'Easy'
+                              ? 'bg-green-100 text-green-800'
+                              : q.Difficulty === 'Medium'
+                              ? 'bg-yellow-100 text-yellow-800'
+                              : 'bg-red-100 text-red-800'
+                          }`}
+                        >
                           {q.Difficulty}
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-gray-600 text-center">{q.Acceptance}</td>
+                      <td className="px-6 py-4 text-gray-600 text-center">
+                        {q.Acceptance}
+                      </td>
                       <td className="px-6 py-4 text-center">
                         <a
                           href={q['Leetcode Question Link']}
@@ -323,7 +357,6 @@ export default function Question() {
             </div>
           )}
         </div>
-
       </div>
     </div>
   );
